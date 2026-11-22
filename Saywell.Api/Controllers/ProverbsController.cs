@@ -9,16 +9,17 @@ public class ProverbsController : ControllerBase
   [HttpGet("random")]
   public IActionResult GetRandom()
   {
-    // Create anonymous object representing a proverb
-    var proverb = new
+    // Create a list of anonymous objects representing a proverbs
+    var proverbs = new[]
     {
-      Title = "Simplicity",
-      Content = "Simplicity is the ultimate sophistication.",
-      Author = "Unknown",
-      Category = "Computers"
+      new { Title = "Simplicity", Content = "Less is more", Category = "Computers" },
+      new { Title = "Experience", Content = "Practice makes perfect", Category = "Learning" },
+      new { Title = "Persistence", Content = "Every journey begins with a single step", Category = "Life" }
     };
 
-    // Return 200 OK and the proverb as a JSON response
+    var proverb = proverbs[Random.Shared.Next(proverbs.Length)];
+
+    // Return 200 OK and the randomly selected proverb as a JSON response
     return Ok(proverb);
   }
 }
