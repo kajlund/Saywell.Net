@@ -1,0 +1,6 @@
+@Saywell.Api_HostAddress = http://localhost:5229
+
+GET {{Saywell.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
