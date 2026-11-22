@@ -1,4 +1,13 @@
-@baseURL = http://localhost:5229
+@baseUrl = http://localhost:5229
 
-GET {{baseURL}}/api/proverbs/random
-Accept: application/json
+### Random proverb — any category
+GET {{baseUrl}}/api/proverbs/random
+
+### Random proverb — Computers
+GET {{baseUrl}}/api/proverbs/random?category=Computers
+
+### Random proverb — case-insensitive filtering
+GET {{baseUrl}}/api/proverbs/random?category=computers
+
+### Random proverb — unknown category
+GET {{baseUrl}}/api/proverbs/random?category=Unknown
