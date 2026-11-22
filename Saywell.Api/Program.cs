@@ -1,23 +1,23 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Registers controller infrastructure
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+// creates the configured application and its dependency injection container.
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+  app.MapOpenApi();
 }
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+// maps controller actions to HTTP endpoints based on their routing attributes.
 app.MapControllers();
-
+// starts the application and begins accepting HTTP requests.
 app.Run();
