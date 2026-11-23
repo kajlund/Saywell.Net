@@ -1,9 +1,14 @@
+using Saywell.Api.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Registers controller infrastructure
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+// Registers the ProverbService as a singleton service in the dependency injection container.
+builder.Services.AddSingleton<ProverbService>();
 
 // creates the configured application and its dependency injection container.
 var app = builder.Build();
