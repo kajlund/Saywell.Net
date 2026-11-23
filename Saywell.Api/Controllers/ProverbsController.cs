@@ -17,6 +17,8 @@ public class ProverbsController : ControllerBase
   }
 
   [HttpGet("random")]
+  [ProducesResponseType<ProverbResponse>(StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status404NotFound)]
   public ActionResult<ProverbResponse> GetRandom([FromQuery] string? category)
   {
     var proverb = _proverbService.GetRandom(category);
