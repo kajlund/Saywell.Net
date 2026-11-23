@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
+using Saywell.Api.Dtos;
+
 namespace Saywell.Api.Controllers;
 
 [ApiController]
@@ -7,15 +9,14 @@ namespace Saywell.Api.Controllers;
 public class ProverbsController : ControllerBase
 {
   [HttpGet("random")]
-  public IActionResult GetRandom([FromQuery] string? category)
+  public ActionResult<ProverbResponse> GetRandom([FromQuery] string? category)
   {
-    // Create a list of anonymous objects representing a proverbs
-    var proverbs = new[]
-    {
-      new { Title = "Simplicity", Content = "Less is more", Category = "Computers" },
-      new { Title = "Experience", Content = "Practice makes perfect", Category = "Learning" },
-      new { Title = "Persistence", Content = "Every journey begins with a single step", Category = "Life" }
-    };
+    // Create a list of sample ProverbResponse records to simulate a database of proverbs
+    ProverbResponse[] proverbs = [
+      new ("Simplicity", "Less is more", "Computers"),
+      new ("Experience", "Practice makes perfect", "Learning"),
+      new ("Persistence", "Every journey begins with a single step", "Life")
+    ];
 
     var candidates = proverbs
       .Where(p => category == null ||
