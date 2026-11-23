@@ -7,8 +7,8 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-// Registers the ProverbService as a singleton service in the dependency injection container.
-builder.Services.AddSingleton<ProverbService>();
+// Registers the ProverbService service in the dependency injection container.
+builder.Services.AddScoped<ProverbService>();
 
 // creates the configured application and its dependency injection container.
 var app = builder.Build();
