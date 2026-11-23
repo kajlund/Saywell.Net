@@ -1,6 +1,16 @@
-@Saywell.Api_HostAddress = http://localhost:5229
+@baseUrl = http://localhost:5229
 
-GET {{Saywell.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+### OpenAPI document
+GET {{baseUrl}}/openapi/v1.json
 
-###
+### Random proverb — any category
+GET {{baseUrl}}/api/proverbs/random
+
+### Random proverb — Computers
+GET {{baseUrl}}/api/proverbs/random?category=Computers
+
+### Random proverb — case-insensitive filtering
+GET {{baseUrl}}/api/proverbs/random?category=computers
+
+### Random proverb — unknown category
+GET {{baseUrl}}/api/proverbs/random?category=Unknown
