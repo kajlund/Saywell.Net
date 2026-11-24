@@ -38,6 +38,21 @@ public class ProverbsController : ControllerBase
     return Ok(proverb);
   }
 
+  [HttpPost]
+  [ProducesResponseType<ProverbResponse>(StatusCodes.Status201Created)]
+  [ProducesResponseType<ValidationProblemDetails>(StatusCodes.Status400BadRequest)]
+  public ActionResult<ProverbResponse> Create(
+  [FromBody] CreateProverbRequest request)
+  {
+    var proverb = _proverbService.Create(request);
+
+    return CreatedAtRoute(
+      "GetProverbById",
+      new { id = proverb.Id },
+      proverb
+    );
+  }
+
   [HttpGet("random")]
   [ProducesResponseType<ProverbResponse>(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status404NotFound)]

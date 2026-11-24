@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:5229
-@proverbId = 01a20dd8-0832-765f-a8f5-ab7ba0ebec4c
+@proverbId = 01a20e68-c713-7ec5-9130-df2447b704fb
 ### OpenAPI document
 GET {{baseUrl}}/openapi/v1.json
 
@@ -15,6 +15,31 @@ GET {{baseUrl}}/api/proverbs/00000000-0000-0000-0000-000000000000
 
 ### Invalid UUID
 GET {{baseUrl}}/api/proverbs/abc
+
+### Create proverb
+# @name createProverb
+POST {{baseUrl}}/api/proverbs
+Content-Type: application/json
+
+{
+  "title": "Premature optimization",
+  "content": "Premature optimization is the root of all evil.",
+  "author": "Donald Knuth",
+  "category": "Computers"
+}
+
+### Get newly created proverb
+GET {{baseUrl}}/api/proverbs/{{createProverb.response.body.$.id}}
+
+### Create invalid proverb
+POST {{baseUrl}}/api/proverbs
+Content-Type: application/json
+
+{
+  "title": "",
+  "content": "Some content",
+  "category": "Computers"
+}
 
 ### Random proverb — any category
 GET {{baseUrl}}/api/proverbs/random
