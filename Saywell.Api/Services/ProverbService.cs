@@ -11,6 +11,11 @@ public class ProverbService
     new(Guid.CreateVersion7(), "Persistence", "Every journey begins with a single step", "Unknown", "Life")
   ];
 
+  public IReadOnlyList<ProverbResponse> GetAll()
+  {
+    return Array.AsReadOnly(_proverbs);
+  }
+
   public ProverbResponse? GetRandom(string? category)
   {
     var candidates = _proverbs

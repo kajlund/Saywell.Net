@@ -3,6 +3,10 @@
 ### OpenAPI document
 GET {{baseUrl}}/openapi/v1.json
 
+### Get all proverbs
+GET {{baseUrl}}/api/proverbs
+Accept: application/json
+
 ### Random proverb — any category
 GET {{baseUrl}}/api/proverbs/random
 

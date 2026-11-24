@@ -16,6 +16,13 @@ public class ProverbsController : ControllerBase
     _proverbService = proverbService;
   }
 
+  [HttpGet]
+  [ProducesResponseType<ProverbResponse[]>(StatusCodes.Status200OK)]
+  public ActionResult<IReadOnlyList<ProverbResponse>> GetAll()
+  {
+    return Ok(_proverbService.GetAll());
+  }
+
   [HttpGet("random")]
   [ProducesResponseType<ProverbResponse>(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status404NotFound)]
