@@ -4,11 +4,11 @@ namespace Saywell.Api.Services;
 
 public class ProverbService
 {
-  private readonly ProverbResponse[] _proverbs =
+  private static readonly ProverbResponse[] _proverbs =
   [
-    new("Simplicity", "Less is more", "Computers"),
-    new("Experience", "Practice makes perfect", "Learning"),
-    new("Persistence", "Every journey begins with a single step", "Life")
+    new(Guid.CreateVersion7(), "Simplicity", "Less is more", "Unknown", "Computers"),
+    new(Guid.CreateVersion7(), "Experience", "Practice makes perfect", "Unknown", "Learning"),
+    new(Guid.CreateVersion7(), "Persistence", "Every journey begins with a single step", "Unknown", "Life")
   ];
 
   public ProverbResponse? GetRandom(string? category)
