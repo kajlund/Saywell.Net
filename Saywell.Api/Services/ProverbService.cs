@@ -16,6 +16,11 @@ public class ProverbService
     return Array.AsReadOnly(_proverbs);
   }
 
+  public ProverbResponse? GetById(Guid id)
+  {
+    return _proverbs.FirstOrDefault(p => p.Id == id);
+  }
+
   public ProverbResponse? GetRandom(string? category)
   {
     var candidates = _proverbs

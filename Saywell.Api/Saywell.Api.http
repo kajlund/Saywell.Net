@@ -1,11 +1,20 @@
 @baseUrl = http://localhost:5229
-
+@proverbId = 01a20dd8-0832-765f-a8f5-ab7ba0ebec4c
 ### OpenAPI document
 GET {{baseUrl}}/openapi/v1.json
 
 ### Get all proverbs
 GET {{baseUrl}}/api/proverbs
 Accept: application/json
+
+### Get existing proverb
+GET {{baseUrl}}/api/proverbs/{{proverbId}}
+
+### Get nonexistent proverb
+GET {{baseUrl}}/api/proverbs/00000000-0000-0000-0000-000000000000
+
+### Invalid UUID
+GET {{baseUrl}}/api/proverbs/abc
 
 ### Random proverb — any category
 GET {{baseUrl}}/api/proverbs/random

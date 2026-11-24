@@ -23,6 +23,21 @@ public class ProverbsController : ControllerBase
     return Ok(_proverbService.GetAll());
   }
 
+  [HttpGet("{id:guid}", Name = "GetProverbById")]
+  [ProducesResponseType<ProverbResponse>(StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status404NotFound)]
+  public ActionResult<ProverbResponse> GetById([FromRoute] Guid id)
+  {
+    var proverb = _proverbService.GetById(id);
+
+    if (proverb is null)
+    {
+      return NotFound();
+    }
+
+    return Ok(proverb);
+  }
+
   [HttpGet("random")]
   [ProducesResponseType<ProverbResponse>(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status404NotFound)]
