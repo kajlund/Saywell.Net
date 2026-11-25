@@ -16,6 +16,18 @@ GET {{baseUrl}}/api/proverbs/00000000-0000-0000-0000-000000000000
 ### Invalid UUID
 GET {{baseUrl}}/api/proverbs/abc
 
+### Random proverb — any category
+GET {{baseUrl}}/api/proverbs/random
+
+### Random proverb — Computers
+GET {{baseUrl}}/api/proverbs/random?category=Computers
+
+### Random proverb — case-insensitive filtering
+GET {{baseUrl}}/api/proverbs/random?category=computers
+
+### Random proverb — unknown category
+GET {{baseUrl}}/api/proverbs/random?category=Unknown
+
 ### Create proverb
 # @name createProverb
 POST {{baseUrl}}/api/proverbs
@@ -28,9 +40,6 @@ Content-Type: application/json
   "category": "Computers"
 }
 
-### Get newly created proverb
-GET {{baseUrl}}/api/proverbs/{{createProverb.response.body.$.id}}
-
 ### Create invalid proverb
 POST {{baseUrl}}/api/proverbs
 Content-Type: application/json
@@ -41,14 +50,47 @@ Content-Type: application/json
   "category": "Computers"
 }
 
-### Random proverb — any category
-GET {{baseUrl}}/api/proverbs/random
+### Get newly created proverb
+GET {{baseUrl}}/api/proverbs/{{createProverb.response.body.$.id}}
 
-### Random proverb — Computers
-GET {{baseUrl}}/api/proverbs/random?category=Computers
+### Update created proverb
+PUT {{baseUrl}}/api/proverbs/{{createProverb.response.body.$.id}}
+Content-Type: application/json
 
-### Random proverb — case-insensitive filtering
-GET {{baseUrl}}/api/proverbs/random?category=computers
+{
+  "title": "Premature optimization (updated)",
+  "content": "Premature optimization is the root of all evil.",
+  "author": "Donald Knuth",
+  "category": "Programming"
+}
 
-### Random proverb — unknown category
-GET {{baseUrl}}/api/proverbs/random?category=Unknown
+### Update nonexistent proverb
+PUT {{baseUrl}}/api/proverbs/00000000-0000-0000-0000-000000000000
+Content-Type: application/json
+
+{
+  "title": "Test",
+  "content": "Test content",
+  "author": "Unknown",
+  "category": "Computers"
+}
+
+### Update with invalid data
+PUT {{baseUrl}}/api/proverbs/{{createProverb.response.body.$.id}}
+Content-Type: application/json
+
+{
+  "title": "",
+  "content": "Test content",
+  "author": "Unknown",
+  "category": "Computers"
+}
+
+### Delete created proverb
+DELETE {{baseUrl}}/api/proverbs/{{createProverb.response.body.$.id}}
+
+### Retrieve deleted proverb
+GET {{baseUrl}}/api/proverbs/{{createProverb.response.body.$.id}}
+
+### Delete nonexistent proverb
+DELETE {{baseUrl}}/api/proverbs/00000000-0000-0000-0000-000000000000

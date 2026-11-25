@@ -55,6 +55,32 @@ public class ProverbService
     return proverb;
   }
 
+  public ProverbResponse? Update(Guid id, UpdateProverbRequest request)
+  {
+    while (_proverbs.TryGetValue(id, out var existing))
+    {
+      var updated = existing with
+      {
+        Title = request.Title.Trim(),
+        Content = request.Content.Trim(),
+        Author = request.Author.Trim(),
+        Category = request.Category.Trim()
+      };
+
+      if (_proverbs.TryUpdate(id, updated, existing))
+      {
+        return updated;
+      }
+    }
+
+    return null;
+  }
+
+  public bool Delete(Guid id)
+  {
+    return _proverbs.TryRemove(id, out _);
+  }
+
   public ProverbResponse? GetRandom(string? category)
   {
     var candidates = _proverbs.Values

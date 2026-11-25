@@ -53,6 +53,37 @@ public class ProverbsController : ControllerBase
     );
   }
 
+  [HttpPut("{id:guid}")]
+  [ProducesResponseType<ProverbResponse>(StatusCodes.Status200OK)]
+  [ProducesResponseType<ValidationProblemDetails>(StatusCodes.Status400BadRequest)]
+  [ProducesResponseType(StatusCodes.Status404NotFound)]
+  public ActionResult<ProverbResponse> Update(
+  [FromRoute] Guid id,
+  [FromBody] UpdateProverbRequest request)
+  {
+    var proverb = _proverbService.Update(id, request);
+
+    if (proverb is null)
+    {
+      return NotFound();
+    }
+
+    return Ok(proverb);
+  }
+
+  [HttpDelete("{id:guid}")]
+  [ProducesResponseType(StatusCodes.Status204NoContent)]
+  [ProducesResponseType(StatusCodes.Status404NotFound)]
+  public IActionResult Delete([FromRoute] Guid id)
+  {
+    if (!_proverbService.Delete(id))
+    {
+      return NotFound();
+    }
+
+    return NoContent();
+  }
+
   [HttpGet("random")]
   [ProducesResponseType<ProverbResponse>(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status404NotFound)]
